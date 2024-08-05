@@ -10,7 +10,9 @@ using System.Collections.Generic;
 // #2 Use "resfinder" in the toolbox bitmap attribute instead of the control name.
 // #3 use the "<default namespace>.<resourcename>" string to locate the resource.
 // See: http://www.bobpowell.net/toolboxbitmap.htm
+#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
 internal class resfinder
+#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
 {
 }
 
