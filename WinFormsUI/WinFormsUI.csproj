@@ -155,13 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="dockpanelsuite.snk" />
-    <None Include="license.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Docking\DockPanel.bmp" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net40' OR '$(TargetFramework)' == 'net35'">
-    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <!--<PackageReference Include="Vanara.PInvoke.SHCore" Version="3.3.4" />-->
