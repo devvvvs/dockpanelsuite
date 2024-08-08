@@ -232,7 +232,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 if (IsDisposed)
                     return;
 
-                if (ActivePane == null || ActivePane.IsActivated)
+                if (ActivePane == null || ActivePane.IsActivated || FlagDragging)
                 {
                     return;
                 }
