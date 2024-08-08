@@ -17,6 +17,18 @@ namespace WeifenLuo.WinFormsUI.Docking
         protected ThemeBase()
         {
             Extender = new DockPanelExtender();
+
+            if (OperatingSystem.IsWindowsVersionAtLeast(6, 1))
+            {
+                using (var g = Graphics.FromHwnd(IntPtr.Zero))
+                {
+                    Scaling = g.DpiX / 96f;
+                }
+            }
+            else
+            {
+                Scaling = 1f;
+            }
         }
 
         public DockPanelSkin Skin { get; protected set; }
@@ -26,6 +38,10 @@ namespace WeifenLuo.WinFormsUI.Docking
         public IImageService ImageService { get; protected set; }
 
         public IPaintingService PaintingService { get; protected set; }
+
+        public float Scaling { get; }
+
+        public int ApplyScaling(int value) => (int)(value * Scaling);
 
         protected ToolStripRenderer ToolStripRenderer { get; set;}
 

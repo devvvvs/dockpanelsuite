@@ -269,13 +269,15 @@ namespace WeifenLuo.WinFormsUI.Docking
             return result;
         }
 
-        public static Bitmap GetFiveBackground(Bitmap mask, Color innerBorder, Color outerBorder, IPaintingService painting)
+        public static Bitmap GetFiveBackground(Bitmap mask, Color innerBorder, Color outerBorder, IPaintingService painting, float scaling)
         {
             // TODO: calculate points using functions.
             using (var input = GetLayerImage(innerBorder, mask.Width, painting))
             {
                 using (var gfx = Graphics.FromImage(input))
                 {
+                    gfx.ScaleTransform(scaling, scaling);
+
                     var pen = painting.GetPen(outerBorder);
                     gfx.DrawLines(pen, new[]
                     {
@@ -306,6 +308,11 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                 return MaskImages(input, mask);
             }
+        }
+
+        public static Bitmap Rescale(this Bitmap bitmap, float scaling)
+        {
+            return new Bitmap(bitmap, new Size((int)(bitmap.Width * scaling), (int)(bitmap.Height * scaling)));
         }
     }
 
