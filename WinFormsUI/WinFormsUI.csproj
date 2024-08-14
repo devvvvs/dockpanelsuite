@@ -7,19 +7,7 @@
     <Authors>Weifen Luo and other contributors</Authors>
     <Description>The docking library for .Net Windows Forms development which mimics Visual Studio .Net.</Description>
     <Copyright>(C) 2007-2020 Weifen Luo and other contributors</Copyright>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>http://dockpanelsuite.com</PackageProjectUrl>
-    <PackageReleaseNotes>
-      Release notes can be found at GitHub,
-      https://github.com/dockpanelsuite/dockpanelsuite/releases
-
-      Visual Studio 2003 Theme: https://www.nuget.org/packages/DockPanelSuite.ThemeVS2003/
-      Visual Studio 2005 Theme: https://www.nuget.org/packages/DockPanelSuite.ThemeVS2005/
-      Visual Studio 2012 Themes: https://www.nuget.org/packages/DockPanelSuite.ThemeVS2012/
-      Visual Studio 2013 Themes: https://www.nuget.org/packages/DockPanelSuite.ThemeVS2013/
-      Visual Studio 2015 Themes: https://www.nuget.org/packages/DockPanelSuite.ThemeVS2015/
-    </PackageReleaseNotes>
+    <IsPackable>false</IsPackable>
     <TargetFrameworks>net8.0-windows</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
     <StartupObject />
@@ -29,7 +17,6 @@
     <AssemblyOriginatorKeyFile>dockpanelsuite.snk</AssemblyOriginatorKeyFile>
     <EnableDefaultItems>false</EnableDefaultItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

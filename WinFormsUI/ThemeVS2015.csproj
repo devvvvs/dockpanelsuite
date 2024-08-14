@@ -7,13 +7,7 @@
     <Authors>Weifen Luo and other contributors</Authors>
     <Description>Visual Studio 2015 themes for DockPanel Suite.</Description>
     <Copyright>(C) 2007-2020 Weifen Luo and other contributors</Copyright>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>http://dockpanelsuite.com</PackageProjectUrl>
-    <PackageReleaseNotes>
-      Release notes can be found at GitHub,
-      https://github.com/dockpanelsuite/dockpanelsuite/releases
-    </PackageReleaseNotes>
+    <IsPackable>false</IsPackable>
     <TargetFrameworks>net8.0-windows</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
     <StartupObject />
@@ -22,7 +16,6 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>dockpanelsuite.snk</AssemblyOriginatorKeyFile>
     <EnableDefaultItems>false</EnableDefaultItems>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
