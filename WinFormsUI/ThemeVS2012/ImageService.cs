@@ -56,7 +56,8 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
 
             var scaling = theme.Scaling;
             Dockindicator_PaneDiamond_Hotspot = Resources.Dockindicator_PaneDiamond_Hotspot.Rescale(scaling);
-            DockIndicator_PaneDiamond_HotspotIndex = Resources.DockIndicator_PaneDiamond_HotspotIndex.Rescale(scaling);
+            // Don't scale, it contains the indices
+            DockIndicator_PaneDiamond_HotspotIndex = Resources.DockIndicator_PaneDiamond_HotspotIndex;
 
             var arrow = _palette.DockTarget.GlyphArrow;
             var outerBorder = _palette.DockTarget.Border;
@@ -149,7 +150,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
                 DockIndicator_PanelRight = ImageServiceHelper.GetDockImage(right, layerBorder);
                 DockIndicator_PanelTop = ImageServiceHelper.GetDockImage(top, layerBorder);
 
-                using (var five = ImageServiceHelper.GetFiveBackground(Resources.MaskDockFive, innerBorder, outerBorder, theme.PaintingService, scaling))
+                using (var five = ImageServiceHelper.GetFiveBackground(Resources.MaskDockFive.Rescale(scaling), innerBorder, outerBorder, theme.PaintingService, scaling))
                 {
                     Dockindicator_PaneDiamond = ImageServiceHelper.CombineFive(five, bottom, center, left, right, top);
                     Dockindicator_PaneDiamond_Fill = ImageServiceHelper.CombineFive(five, bottom, center, left, right, top);
