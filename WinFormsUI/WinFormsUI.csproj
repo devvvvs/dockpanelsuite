@@ -80,9 +80,7 @@
     <Compile Include="Docking\DockPanel.Persistor.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Docking\DockPane.SplitterControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Docking\DockPane.SplitterControl.cs" />
     <Compile Include="Docking\DockPaneStripBase.cs">
       <SubType>Component</SubType>
     </Compile>
