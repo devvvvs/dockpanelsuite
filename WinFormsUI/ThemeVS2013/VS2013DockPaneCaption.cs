@@ -12,15 +12,15 @@ namespace WeifenLuo.WinFormsUI.Docking
     internal class VS2013DockPaneCaption : DockPaneCaptionBase
     {
         #region consts
-        private const int TextGapTop = 3;
-        private const int TextGapBottom = 2;
-        private const int TextGapLeft = 2;
-        private const int TextGapRight = 3;
-        private const int ButtonGapTop = 4;
-        private const int ButtonGapBottom = 3;
-        private const int ButtonGapBetween = 1;
-        private const int ButtonGapLeft = 1;
-        private const int ButtonGapRight = 5;
+        private const int _TextGapTop = 3;
+        private const int _TextGapBottom = 2;
+        private const int _TextGapLeft = 2;
+        private const int _TextGapRight = 3;
+        private const int _ButtonGapTop = 4;
+        private const int _ButtonGapBottom = 3;
+        private const int _ButtonGapBetween = 1;
+        private const int _ButtonGapLeft = 1;
+        private const int _ButtonGapRight = 5;
         #endregion
 
         private InertButtonBase m_buttonClose;
@@ -97,12 +97,14 @@ namespace WeifenLuo.WinFormsUI.Docking
             get { return m_components; }
         }
 
+        private DpiAwareFontManager m_fontManager;
         private ToolTip m_toolTip;
 
         public VS2013DockPaneCaption(DockPane pane) : base(pane)
         {
             SuspendLayout();
 
+            m_fontManager = new DpiAwareFontManager(pane.DockPanel.Theme.Skin.DockPaneStripSkin.TextFont, pane.DockPanel);
             m_components = new Container();
             m_toolTip = new ToolTip(Components);
 
@@ -116,10 +118,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             base.Dispose(disposing);
         }
 
-        public Font TextFont
-        {
-            get { return DockPane.DockPanel.Theme.Skin.DockPaneStripSkin.TextFont; }
-        }
+        public Font TextFont => m_fontManager.Font;
 
         private static string _toolTipClose;
         private static string ToolTipClose
@@ -181,12 +180,22 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
+        private int TextGapTop => LogicalToDeviceUnits(_TextGapTop);
+        private int TextGapBottom => LogicalToDeviceUnits(_TextGapBottom);
+        private int TextGapLeft => LogicalToDeviceUnits(_TextGapLeft);
+        private int TextGapRight => LogicalToDeviceUnits(_TextGapRight);
+        private int ButtonGapTop => LogicalToDeviceUnits(_ButtonGapTop);
+        private int ButtonGapBottom => LogicalToDeviceUnits(_ButtonGapBottom);
+        private int ButtonGapBetween => LogicalToDeviceUnits(_ButtonGapBetween);
+        private int ButtonGapLeft => LogicalToDeviceUnits(_ButtonGapLeft);
+        private int ButtonGapRight => LogicalToDeviceUnits(_ButtonGapRight);
+
         protected override int MeasureHeight()
         {
             int height = TextFont.Height + TextGapTop + TextGapBottom;
 
-            if (height < ButtonClose.Image.Height + ButtonGapTop + ButtonGapBottom)
-                height = ButtonClose.Image.Height + ButtonGapTop + ButtonGapBottom;
+            if (height < ButtonClose.Height + ButtonGapTop + ButtonGapBottom)
+                height = ButtonClose.Height + ButtonGapTop + ButtonGapBottom;
 
             return height;
         }
@@ -255,13 +264,14 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             var penDots = DockPane.DockPanel.Theme.PaintingService.GetPen(colorDots, 1);
             penDots.DashStyle = DashStyle.Custom;
-            penDots.DashPattern = new float[] { 1, 3 };
+            penDots.DashPattern = new float[] { LogicalToDeviceUnits(1), LogicalToDeviceUnits(3) };
             int positionY = rectStrip.Height / 2;
 
-            g.DrawLine(penDots, rectStrip.X + 2, positionY, rectStrip.X + rectStrip.Width - 2, positionY);
+            var two = LogicalToDeviceUnits(2);
+            g.DrawLine(penDots, rectStrip.X + two, positionY, rectStrip.X + rectStrip.Width - two, positionY);
 
-            g.DrawLine(penDots, rectStrip.X, positionY - 2, rectStrip.X + rectStrip.Width, positionY - 2);
-            g.DrawLine(penDots, rectStrip.X, positionY + 2, rectStrip.X + rectStrip.Width, positionY + 2);
+            g.DrawLine(penDots, rectStrip.X, positionY - two, rectStrip.X + rectStrip.Width, positionY - two);
+            g.DrawLine(penDots, rectStrip.X, positionY + two, rectStrip.X + rectStrip.Width, positionY + two);
         }
 
         protected override void OnLayout(LayoutEventArgs levent)
@@ -311,8 +321,8 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             // set the size and location for close and auto-hide buttons
             Rectangle rectCaption = ClientRectangle;
-            int buttonWidth = ButtonClose.Image.Width;
-            int buttonHeight = ButtonClose.Image.Height;
+            int buttonWidth = LogicalToDeviceUnits(ButtonClose.Image.Width);
+            int buttonHeight = LogicalToDeviceUnits(ButtonClose.Image.Height);
 
             Size buttonSize = new Size(buttonWidth, buttonHeight);
             int x = rectCaption.X + rectCaption.Width - ButtonGapRight - m_buttonClose.Width;

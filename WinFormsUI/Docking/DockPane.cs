@@ -1262,12 +1262,12 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             DockPane floatPane = ActiveContent.DockHandler.FloatPane;
             if (DockState == DockState.Float || floatPane == null || floatPane.FloatWindow.NestedPanes.Count != 1)
-                size = DockPanel.DefaultFloatWindowSize;
+                size = DockPanel.LogicalToDeviceUnits(DockPanel.DefaultFloatWindowSize);
             else
                 size = floatPane.FloatWindow.Size;
 
             if (ptMouse.X > location.X + size.Width)
-                location.X += ptMouse.X - (location.X + size.Width) + DockPanel.Theme.Measures.SplitterSize;
+                location.X += ptMouse.X - (location.X + size.Width) + DockPanel.LogicalToDeviceUnits(DockPanel.Theme.Measures.SplitterSize);
 
             return new Rectangle(location, size);
         }

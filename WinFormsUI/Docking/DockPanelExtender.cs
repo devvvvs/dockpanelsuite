@@ -70,12 +70,12 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         public interface IPaneIndicatorFactory
         {
-            IPaneIndicator CreatePaneIndicator(ThemeBase theme);
+            IPaneIndicator CreatePaneIndicator(DockPanel panel);
         }
 
         public interface IPanelIndicatorFactory
         {
-            IPanelIndicator CreatePanelIndicator(DockStyle style, ThemeBase theme);
+            IPanelIndicator CreatePanelIndicator(DockStyle style, DockPanel panel);
         }
 
         public interface IDockOutlineFactory

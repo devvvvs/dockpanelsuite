@@ -1141,7 +1141,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             Size size;
             DockPane floatPane = this.FloatPane;
             if (DockState == DockState.Float || floatPane == null || floatPane.FloatWindow.NestedPanes.Count != 1)
-                size = DockPanel.DefaultFloatWindowSize;
+                size = DockPanel.LogicalToDeviceUnits(DockPanel.DefaultFloatWindowSize);
             else
                 size = floatPane.FloatWindow.Size;
 
@@ -1162,7 +1162,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             location = Pane.PointToScreen(location);
 
             if (ptMouse.X > location.X + size.Width)
-                location.X += ptMouse.X - (location.X + size.Width) + DockPanel.Theme.Measures.SplitterSize;
+                location.X += ptMouse.X - (location.X + size.Width) + DockPanel.LogicalToDeviceUnits(DockPanel.Theme.Measures.SplitterSize);
 
             return new Rectangle(location, size);
         }

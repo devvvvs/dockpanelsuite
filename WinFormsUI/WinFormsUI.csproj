@@ -106,7 +106,7 @@
     <Compile Include="Docking\SplitterBase.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Docking\Helpers\DrawHelper.cs" />
+    <Compile Include="Docking\Helpers\*" />
     <Compile Include="Docking\Localization.cs" />
     <Compile Include="Docking\Helpers\ResourceHelper.cs" />
     <Compile Include="Docking\Helpers\Win32Helper.cs" />

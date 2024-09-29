@@ -269,15 +269,13 @@ namespace WeifenLuo.WinFormsUI.Docking
             return result;
         }
 
-        public static Bitmap GetFiveBackground(Bitmap mask, Color innerBorder, Color outerBorder, IPaintingService painting, float scaling)
+        public static Bitmap GetFiveBackground(Bitmap mask, Color innerBorder, Color outerBorder, IPaintingService painting)
         {
             // TODO: calculate points using functions.
             using (var input = GetLayerImage(innerBorder, mask.Width, painting))
             {
                 using (var gfx = Graphics.FromImage(input))
                 {
-                    gfx.ScaleTransform(scaling, scaling);
-
                     var pen = painting.GetPen(outerBorder);
                     gfx.DrawLines(pen, new[]
                     {

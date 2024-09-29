@@ -54,8 +54,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
         {
             _palette = theme.ColorPalette;
 
-            var scaling = theme.Scaling;
-            Dockindicator_PaneDiamond_Hotspot = Resources.Dockindicator_PaneDiamond_Hotspot.Rescale(scaling);
+            Dockindicator_PaneDiamond_Hotspot = Resources.Dockindicator_PaneDiamond_Hotspot;
             // Don't scale, it contains the indices
             DockIndicator_PaneDiamond_HotspotIndex = Resources.DockIndicator_PaneDiamond_HotspotIndex;
 
@@ -68,26 +67,26 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
             var core = _palette.DockTarget.GlyphBackground;
             var drawCore = core.ToArgb() != background.ToArgb();
 
-            using var MaskArrowBottom = Resources.MaskArrowBottom.Rescale(scaling);
-            using var MaskWindowBottom = Resources.MaskWindowBottom.Rescale(scaling);
-            using var MaskDock = Resources.MaskDock.Rescale(scaling);
-            using var MaskCoreBottom = Resources.MaskCoreBottom.Rescale(scaling);
-            using var MaskWindowCenter = Resources.MaskWindowCenter.Rescale(scaling);
-            using var MaskCoreCenter = Resources.MaskCoreCenter.Rescale(scaling);
-            using var MaskArrowLeft = Resources.MaskArrowLeft.Rescale(scaling);
-            using var MaskWindowLeft = Resources.MaskWindowLeft.Rescale(scaling);
-            using var MaskCoreLeft = Resources.MaskCoreLeft.Rescale(scaling);
-            using var MaskArrowRight = Resources.MaskArrowRight.Rescale(scaling);
-            using var MaskWindowRight = Resources.MaskWindowRight.Rescale(scaling);
-            using var MaskCoreRight = Resources.MaskCoreRight.Rescale(scaling);
-            using var MaskArrowTop = Resources.MaskArrowTop.Rescale(scaling);
-            using var MaskWindowTop = Resources.MaskWindowTop.Rescale(scaling);
-            using var MaskCoreTop = Resources.MaskCoreTop.Rescale(scaling);
+            var MaskArrowBottom = Resources.MaskArrowBottom;
+            var MaskWindowBottom = Resources.MaskWindowBottom;
+            var MaskDock = Resources.MaskDock;
+            var MaskCoreBottom = Resources.MaskCoreBottom;
+            var MaskWindowCenter = Resources.MaskWindowCenter;
+            var MaskCoreCenter = Resources.MaskCoreCenter;
+            var MaskArrowLeft = Resources.MaskArrowLeft;
+            var MaskWindowLeft = Resources.MaskWindowLeft;
+            var MaskCoreLeft = Resources.MaskCoreLeft;
+            var MaskArrowRight = Resources.MaskArrowRight;
+            var MaskWindowRight = Resources.MaskWindowRight;
+            var MaskCoreRight = Resources.MaskCoreRight;
+            var MaskArrowTop = Resources.MaskArrowTop;
+            var MaskWindowTop = Resources.MaskWindowTop;
+            var MaskCoreTop = Resources.MaskCoreTop;
 
-            using (var layerArrow = ImageServiceHelper.GetLayerImage(arrow, theme.ApplyScaling(32), theme.PaintingService))
-            using (var layerWindow = ImageServiceHelper.GetLayerImage(window, theme.ApplyScaling(32), theme.PaintingService))
-            using (var layerCore = drawCore ? ImageServiceHelper.GetLayerImage(core, theme.ApplyScaling(32), theme.PaintingService) : null)
-            using (var layerBorder = ImageServiceHelper.GetBackground(innerBorder, outerBorder, theme.ApplyScaling(40), theme.PaintingService))
+            using (var layerArrow = ImageServiceHelper.GetLayerImage(arrow, 32, theme.PaintingService))
+            using (var layerWindow = ImageServiceHelper.GetLayerImage(window, 32, theme.PaintingService))
+            using (var layerCore = drawCore ? ImageServiceHelper.GetLayerImage(core, 32, theme.PaintingService) : null)
+            using (var layerBorder = ImageServiceHelper.GetBackground(innerBorder, outerBorder, 40, theme.PaintingService))
             using (var bottom = ImageServiceHelper.GetDockIcon(
                 MaskArrowBottom,
                 layerArrow,
@@ -150,20 +149,20 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
                 DockIndicator_PanelRight = ImageServiceHelper.GetDockImage(right, layerBorder);
                 DockIndicator_PanelTop = ImageServiceHelper.GetDockImage(top, layerBorder);
 
-                using (var five = ImageServiceHelper.GetFiveBackground(Resources.MaskDockFive.Rescale(scaling), innerBorder, outerBorder, theme.PaintingService, scaling))
+                using (var five = ImageServiceHelper.GetFiveBackground(Resources.MaskDockFive, innerBorder, outerBorder, theme.PaintingService))
                 {
                     Dockindicator_PaneDiamond = ImageServiceHelper.CombineFive(five, bottom, center, left, right, top);
                     Dockindicator_PaneDiamond_Fill = ImageServiceHelper.CombineFive(five, bottom, center, left, right, top);
                 }
             }
 
-            using var MaskTabClose = Resources.MaskTabClose.Rescale(scaling);
-            using var MaskTabList = Resources.MaskTabList.Rescale(scaling);
-            using var MaskTabOverflow = Resources.MaskTabOverflow.Rescale(scaling);
-            using var MaskToolWindowClose = Resources.MaskToolWindowClose.Rescale(scaling);
-            using var MaskToolWindowDock = Resources.MaskToolWindowDock.Rescale(scaling);
-            using var MaskToolWindowOption = Resources.MaskToolWindowOption.Rescale(scaling);
-            using var MaskToolWindowAutoHide = Resources.MaskToolWindowAutoHide.Rescale(scaling);
+            var MaskTabClose = Resources.MaskTabClose;
+            var MaskTabList = Resources.MaskTabList;
+            var MaskTabOverflow = Resources.MaskTabOverflow;
+            var MaskToolWindowClose = Resources.MaskToolWindowClose;
+            var MaskToolWindowDock = Resources.MaskToolWindowDock;
+            var MaskToolWindowOption = Resources.MaskToolWindowOption;
+            var MaskToolWindowAutoHide = Resources.MaskToolWindowAutoHide;
 
             TabActive_Close = ImageServiceHelper.GetImage(MaskTabClose, _palette.TabSelectedActive.Button, _palette.TabSelectedActive.Background);
             TabInactive_Close = ImageServiceHelper.GetImage(MaskTabClose, _palette.TabUnselectedHovered.Button, _palette.TabUnselectedHovered.Background);

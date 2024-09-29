@@ -62,7 +62,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
 
         protected override int SplitterSize
         {
-            get { return _host.IsDockWindow ? _host.DockPanel.Theme.Measures.SplitterSize : _host.DockPanel.Theme.Measures.AutoHideSplitterSize; }
+            get { return LogicalToDeviceUnits(_host.IsDockWindow ? _host.DockPanel.Theme.Measures.SplitterSize : _host.DockPanel.Theme.Measures.AutoHideSplitterSize); }
         }
 
         protected override void StartDrag()

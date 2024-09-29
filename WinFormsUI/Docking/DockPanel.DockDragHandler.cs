@@ -98,7 +98,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     get
                     {
                         if (m_paneDiamond == null)
-                            m_paneDiamond = m_dragHandler.DockPanel.Theme.Extender.PaneIndicatorFactory.CreatePaneIndicator(m_dragHandler.DockPanel.Theme);
+                            m_paneDiamond = m_dragHandler.DockPanel.Theme.Extender.PaneIndicatorFactory.CreatePaneIndicator(m_dragHandler.DockPanel);
 
                         return m_paneDiamond;
                     }
@@ -110,7 +110,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     get
                     {
                         if (m_panelLeft == null)
-                            m_panelLeft = m_dragHandler.DockPanel.Theme.Extender.PanelIndicatorFactory.CreatePanelIndicator(DockStyle.Left, m_dragHandler.DockPanel.Theme);
+                            m_panelLeft = m_dragHandler.DockPanel.Theme.Extender.PanelIndicatorFactory.CreatePanelIndicator(DockStyle.Left, m_dragHandler.DockPanel);
 
                         return m_panelLeft;
                     }
@@ -122,7 +122,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     get
                     {
                         if (m_panelRight == null)
-                            m_panelRight = m_dragHandler.DockPanel.Theme.Extender.PanelIndicatorFactory.CreatePanelIndicator(DockStyle.Right, m_dragHandler.DockPanel.Theme);
+                            m_panelRight = m_dragHandler.DockPanel.Theme.Extender.PanelIndicatorFactory.CreatePanelIndicator(DockStyle.Right, m_dragHandler.DockPanel);
 
                         return m_panelRight;
                     }
@@ -134,7 +134,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     get
                     {
                         if (m_panelTop == null)
-                            m_panelTop = m_dragHandler.DockPanel.Theme.Extender.PanelIndicatorFactory.CreatePanelIndicator(DockStyle.Top, m_dragHandler.DockPanel.Theme);
+                            m_panelTop = m_dragHandler.DockPanel.Theme.Extender.PanelIndicatorFactory.CreatePanelIndicator(DockStyle.Top, m_dragHandler.DockPanel);
 
                         return m_panelTop;
                     }
@@ -146,7 +146,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     get
                     {
                         if (m_panelBottom == null)
-                            m_panelBottom = m_dragHandler.DockPanel.Theme.Extender.PanelIndicatorFactory.CreatePanelIndicator(DockStyle.Bottom, m_dragHandler.DockPanel.Theme);
+                            m_panelBottom = m_dragHandler.DockPanel.Theme.Extender.PanelIndicatorFactory.CreatePanelIndicator(DockStyle.Bottom, m_dragHandler.DockPanel);
 
                         return m_panelBottom;
                     }
@@ -158,7 +158,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     get
                     {
                         if (m_panelFill == null)
-                            m_panelFill = m_dragHandler.DockPanel.Theme.Extender.PanelIndicatorFactory.CreatePanelIndicator(DockStyle.Fill, m_dragHandler.DockPanel.Theme);
+                            m_panelFill = m_dragHandler.DockPanel.Theme.Extender.PanelIndicatorFactory.CreatePanelIndicator(DockStyle.Fill, m_dragHandler.DockPanel);
 
                         return m_panelFill;
                     }

@@ -96,17 +96,13 @@ namespace WeifenLuo.WinFormsUI.Docking
                 {
                     e.Graphics.DrawImage(
                        IsMouseDown ? PressImage : HoverImage,
-                       PatchController.EnableHighDpi == true
-                           ? ClientRectangle
-                           : new Rectangle(0, 0, Image.Width, Image.Height));
+                       ClientRectangle);
                 }
                 else
                 {
                     e.Graphics.DrawImage(
                        Image,
-                       PatchController.EnableHighDpi == true
-                           ? ClientRectangle
-                           : new Rectangle(0, 0, Image.Width, Image.Height));
+                       ClientRectangle);
                 }
 
                 base.OnPaint(e);
@@ -135,7 +131,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                 e.Graphics.DrawImage(
                    Image,
-                   new Rectangle(0, 0, Image.Width, Image.Height),
+                   ClientRectangle,
                    0, 0,
                    Image.Width,
                    Image.Height,

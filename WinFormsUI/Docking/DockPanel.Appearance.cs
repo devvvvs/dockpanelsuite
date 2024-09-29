@@ -29,11 +29,6 @@
                     return;
                 }
 
-                if (m_dockPanelTheme.GetType() == value.GetType())
-                {
-                    return;
-                }
-
                 m_dockPanelTheme?.CleanUp(this);
                 m_dockPanelTheme = value;
                 m_dockPanelTheme.ApplyTo(this);

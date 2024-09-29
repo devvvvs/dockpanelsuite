@@ -99,28 +99,29 @@ namespace WeifenLuo.WinFormsUI.Docking
             get
             {
                 Rectangle rect = ClientRectangle;
+                var splitterSize = LogicalToDeviceUnits(DockPanel.Theme.Measures.SplitterSize);
                 // if DockWindow is document, exclude the border
                 if (DockState == DockState.Document)
                 {
-                    rect.X += 1;
-                    rect.Y += 1;
-                    rect.Width -= 2;
-                    rect.Height -= 2;
+                    rect.X += LogicalToDeviceUnits(1);
+                    rect.Y += LogicalToDeviceUnits(1);
+                    rect.Width -= LogicalToDeviceUnits(2);
+                    rect.Height -= LogicalToDeviceUnits(2);
                 }
                 // exclude the splitter
                 else if (DockState == DockState.DockLeft)
-                    rect.Width -= DockPanel.Theme.Measures.SplitterSize;
+                    rect.Width -= splitterSize;
                 else if (DockState == DockState.DockRight)
                 {
-                    rect.X += DockPanel.Theme.Measures.SplitterSize;
-                    rect.Width -= DockPanel.Theme.Measures.SplitterSize;
+                    rect.X += splitterSize;
+                    rect.Width -= splitterSize;
                 }
                 else if (DockState == DockState.DockTop)
-                    rect.Height -= DockPanel.Theme.Measures.SplitterSize;
+                    rect.Height -= splitterSize;
                 else if (DockState == DockState.DockBottom)
                 {
-                    rect.Y += DockPanel.Theme.Measures.SplitterSize;
-                    rect.Height -= DockPanel.Theme.Measures.SplitterSize;
+                    rect.Y += splitterSize;
+                    rect.Height -= splitterSize;
                 }
 
                 return rect;

@@ -11,94 +11,12 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         public static void Reset()
         {
-            EnableAll = _highDpi = _memoryLeakFix 
+            EnableAll = _memoryLeakFix 
                 = _nestedDisposalFix = _focusLostFix = _contentOrderFix
                 = _fontInheritanceFix = _activeXFix = _displayingPaneFix
                 = _activeControlFix = _floatSplitterFix = _activateOnDockFix
                 = _selectClosestOnClose = _perScreenDpi = null;
         }
-
-#region Copy this section to create new option, and then comment it to show what needs to be modified.
-        //*
-        private static bool? _highDpi;
-
-        public static bool? EnableHighDpi
-        {
-            get
-            {
-                if (_highDpi != null)
-                {
-                    return _highDpi;
-                }
-
-                if (EnableAll != null)
-                {
-                    return _highDpi = EnableAll;
-                }
-#if NET35 || NET40
-                var section = ConfigurationManager.GetSection("dockPanelSuite") as PatchSection;
-                if (section != null)
-                {
-                    if (section.EnableAll != null)
-                    {
-                        return _highDpi = section.EnableAll;
-                    }
-
-                    return _highDpi = section.EnableHighDpi;
-                }
-#endif
-                var environment = Environment.GetEnvironmentVariable("DPS_EnableHighDpi");
-                if (!string.IsNullOrEmpty(environment))
-                {
-                    var enable = false;
-                    if (bool.TryParse(environment, out enable))
-                    {
-                        return _highDpi = enable;
-                    }
-                }
-
-                {
-                    var key = Registry.CurrentUser.OpenSubKey(@"Software\DockPanelSuite");
-                    if (key != null)
-                    {
-                        var pair = key.GetValue("EnableHighDpi");
-                        if (pair != null)
-                        {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
-                            {
-                                return _highDpi = enable;
-                            }
-                        }
-                    }
-                }
-
-                {
-                    var key = Registry.LocalMachine.OpenSubKey(@"Software\DockPanelSuite");
-                    if (key != null)
-                    {
-                        var pair = key.GetValue("EnableHighDpi");
-                        if (pair != null)
-                        {
-                            var enable = false;
-                            if (bool.TryParse(pair.ToString(), out enable))
-                            {
-                                return _highDpi = enable;
-                            }
-                        }
-                    }
-                }
-
-                return _highDpi = true;
-            }
-
-            set
-            {
-                _highDpi = value;
-            }
-        }
-        // */
-#endregion
 
         private static bool? _memoryLeakFix;
 

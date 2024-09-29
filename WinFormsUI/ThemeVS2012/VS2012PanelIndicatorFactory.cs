@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -7,9 +8,9 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
 {
     internal class VS2012PanelIndicatorFactory : DockPanelExtender.IPanelIndicatorFactory
     {
-        public DockPanel.IPanelIndicator CreatePanelIndicator(DockStyle style, ThemeBase theme)
+        public DockPanel.IPanelIndicator CreatePanelIndicator(DockStyle style, DockPanel panel)
         {
-            return new VS2012PanelIndicator(style, theme);
+            return new VS2012PanelIndicator(style, panel);
         }
 
         [ToolboxItem(false)]
@@ -26,8 +27,9 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
             private Image _imagePanelBottomActive;
             private Image _imagePanelFillActive;
 
-            public VS2012PanelIndicator(DockStyle dockStyle, ThemeBase theme)
+            public VS2012PanelIndicator(DockStyle dockStyle, DockPanel panel)
             {
+                var theme = panel.Theme;
                 _imagePanelLeft = theme.ImageService.DockIndicator_PanelLeft;
                 _imagePanelRight = theme.ImageService.DockIndicator_PanelRight;
                 _imagePanelTop = theme.ImageService.DockIndicator_PanelTop;
@@ -40,7 +42,8 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
                 _imagePanelFillActive = theme.ImageService.DockIndicator_PanelFill;
 
                 m_dockStyle = dockStyle;
-                SizeMode = PictureBoxSizeMode.AutoSize;
+                SizeMode = PictureBoxSizeMode.StretchImage;
+                Size = panel.LogicalToDeviceUnits(_imagePanelFill.Size);
                 Image = ImageInactive;
             }
 
@@ -122,6 +125,12 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
             public DockStyle HitTest(Point pt)
             {
                 return this.Visible && ClientRectangle.Contains(PointToClient(pt)) ? DockStyle : DockStyle.None;
+            }
+
+            protected override void OnDpiChangedAfterParent(EventArgs e)
+            {
+                Size = LogicalToDeviceUnits(_imagePanelFill.Size);
+                base.OnDpiChangedAfterParent(e);
             }
         }
     }

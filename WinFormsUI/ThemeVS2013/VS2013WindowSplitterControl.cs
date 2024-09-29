@@ -19,7 +19,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
 
         protected override int SplitterSize
         {
-            get { return _host.IsDockWindow ? _host.DockPanel.Theme.Measures.SplitterSize : _host.DockPanel.Theme.Measures.AutoHideSplitterSize; }
+            get { return LogicalToDeviceUnits(_host.IsDockWindow ? _host.DockPanel.Theme.Measures.SplitterSize : _host.DockPanel.Theme.Measures.AutoHideSplitterSize); }
         }
 
         protected override void StartDrag()
@@ -44,14 +44,14 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
                     case DockStyle.Right:
                     case DockStyle.Left:
                         {
-                            Debug.Assert(SplitterSize == rect.Width);
+                            //Debug.Assert(SplitterSize == rect.Width);
                             e.Graphics.FillRectangle(_horizontalBrush, rect);
                         }
                         break;
                     case DockStyle.Bottom:
                     case DockStyle.Top:
                         {
-                            Debug.Assert(SplitterSize == rect.Height);
+                            //Debug.Assert(SplitterSize == rect.Height);
                             e.Graphics.FillRectangle(_horizontalBrush, rect);
                         }
                         break;

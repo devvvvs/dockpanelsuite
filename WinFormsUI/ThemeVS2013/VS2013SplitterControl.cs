@@ -10,13 +10,12 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
     internal class VS2013SplitterControl : DockPane.SplitterControlBase
     {
         private readonly SolidBrush _horizontalBrush;
-        private int SplitterSize { get; }
+        private int SplitterSize => LogicalToDeviceUnits(DockPane.DockPanel.Theme.Measures.SplitterSize);
 
         public VS2013SplitterControl(DockPane pane)
             : base(pane)
         {
             _horizontalBrush = pane.DockPanel.Theme.PaintingService.GetBrush(pane.DockPanel.Theme.ColorPalette.MainWindowActive.Background);
-            SplitterSize = pane.DockPanel.Theme.Measures.SplitterSize;
         }
 
         protected override void OnPaint(PaintEventArgs e)

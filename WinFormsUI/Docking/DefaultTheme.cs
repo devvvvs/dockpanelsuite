@@ -180,9 +180,9 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private class DefaultPaneIndicatorFactory : DockPanelExtender.IPaneIndicatorFactory
         {
-            public DockPanel.IPaneIndicator CreatePaneIndicator(ThemeBase theme)
+            public DockPanel.IPaneIndicator CreatePaneIndicator(DockPanel panel)
             {
-                return new DefaultPaneIndicator(theme);
+                return new DefaultPaneIndicator(panel.Theme);
             }
 
             private class DefaultPaneIndicator : DockPanel.IPaneIndicator
@@ -224,9 +224,9 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private class DefaultPanelIndicatorFactory : DockPanelExtender.IPanelIndicatorFactory
         {
-            public DockPanel.IPanelIndicator CreatePanelIndicator(DockStyle style, ThemeBase theme)
+            public DockPanel.IPanelIndicator CreatePanelIndicator(DockStyle style, DockPanel panel)
             {
-                return new DefaultPanelIndicator(style, theme);
+                return new DefaultPanelIndicator(style, panel.Theme);
             }
 
             private class DefaultPanelIndicator : DockPanel.IPanelIndicator

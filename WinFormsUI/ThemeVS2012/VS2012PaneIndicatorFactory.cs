@@ -8,9 +8,9 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
 {
     internal class VS2012PaneIndicatorFactory : DockPanelExtender.IPaneIndicatorFactory
     {
-        public DockPanel.IPaneIndicator CreatePaneIndicator(ThemeBase theme)
+        public DockPanel.IPaneIndicator CreatePaneIndicator(DockPanel panel)
         {
-            return new VS2012PaneIndicator(theme);
+            return new VS2012PaneIndicator(panel);
         }
 
         [ToolboxItem(false)]
@@ -34,10 +34,14 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
                         new DockPanel.HotSpotIndex(1, 2, DockStyle.Bottom)
                     };
 
+            private DockPanel _panel;
             private GraphicsPath _displayingGraphicsPath;
 
-            public VS2012PaneIndicator(ThemeBase theme)
+            public VS2012PaneIndicator(DockPanel panel)
             {
+                _panel = panel;
+
+                var theme = panel.Theme;
                 _bitmapPaneDiamond = theme.ImageService.Dockindicator_PaneDiamond;
                 _bitmapPaneDiamondLeft = theme.ImageService.Dockindicator_PaneDiamond_Fill;
                 _bitmapPaneDiamondRight = theme.ImageService.Dockindicator_PaneDiamond_Fill;
@@ -46,9 +50,12 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
                 _bitmapPaneDiamondFill = theme.ImageService.Dockindicator_PaneDiamond_Fill;
                 _bitmapPaneDiamondHotSpot = theme.ImageService.Dockindicator_PaneDiamond_Hotspot;
                 _bitmapPaneDiamondHotSpotIndex = theme.ImageService.DockIndicator_PaneDiamond_HotspotIndex;
-                _displayingGraphicsPath = DrawHelper.CalculateGraphicsPathFromBitmap(_bitmapPaneDiamond);
 
-                SizeMode = PictureBoxSizeMode.AutoSize;
+                using var i = _bitmapPaneDiamond.Rescale(panel.DeviceDpi / 96f);
+                _displayingGraphicsPath = DrawHelper.CalculateGraphicsPathFromBitmap(i);
+
+                SizeMode = PictureBoxSizeMode.StretchImage;
+                Size = panel.LogicalToDeviceUnits(_bitmapPaneDiamondFill.Size);
                 Image = _bitmapPaneDiamond;
                 Region = new Region(DisplayingGraphicsPath);
             }
@@ -66,6 +73,9 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
                 pt = PointToClient(pt);
                 if (!ClientRectangle.Contains(pt))
                     return DockStyle.None;
+
+                var scaling = 96f / _panel.DeviceDpi;
+                pt = new Point((int)(pt.X * scaling), (int)(pt.Y * scaling));
 
                 for (int i = _hotSpots.GetLowerBound(0); i <= _hotSpots.GetUpperBound(0); i++)
                 {

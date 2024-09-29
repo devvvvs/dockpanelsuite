@@ -23,19 +23,20 @@ namespace WeifenLuo.WinFormsUI.Docking
             get
             {
                 Rectangle rect = ClientRectangle;
+                var splitterSize = LogicalToDeviceUnits(DockPanel.Theme.Measures.SplitterSize);
                 if (DockState == DockState.DockLeft)
-                    rect.Width -= DockPanel.Theme.Measures.SplitterSize;
+                    rect.Width -= splitterSize;
                 else if (DockState == DockState.DockRight)
                 {
-                    rect.X += DockPanel.Theme.Measures.SplitterSize;
-                    rect.Width -= DockPanel.Theme.Measures.SplitterSize;
+                    rect.X += splitterSize;
+                    rect.Width -= splitterSize;
                 }
                 else if (DockState == DockState.DockTop)
-                    rect.Height -= DockPanel.Theme.Measures.SplitterSize;
+                    rect.Height -= splitterSize;
                 else if (DockState == DockState.DockBottom)
                 {
-                    rect.Y += DockPanel.Theme.Measures.SplitterSize;
-                    rect.Height -= DockPanel.Theme.Measures.SplitterSize;
+                    rect.Y += splitterSize;
+                    rect.Height -= splitterSize;
                 }
 
                 return rect;

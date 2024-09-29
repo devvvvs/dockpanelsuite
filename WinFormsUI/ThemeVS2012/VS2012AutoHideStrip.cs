@@ -38,10 +38,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         private const int TabGapBetween = 12;
 
         #region Customizable Properties
-        public Font TextFont
-        {
-            get { return DockPanel.Theme.Skin.AutoHideStripSkin.TextFont; }
-        }
+        public Font TextFont => m_fontManager.Font;
 
         private static StringFormat _stringFormatTabHorizontal;
         private StringFormat StringFormatTabHorizontal
@@ -125,6 +122,8 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
+        private DpiAwareFontManager m_fontManager;
+
         public VS2012AutoHideStrip(DockPanel panel)
             : base(panel)
         {
@@ -133,6 +132,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.OptimizedDoubleBuffer, true);
             BackColor = DockPanel.Theme.ColorPalette.MainWindowActive.Background;
+            m_fontManager = new DpiAwareFontManager(panel.Theme.Skin.AutoHideStripSkin.TextFont, panel);
         }
 
         protected override void OnPaint(PaintEventArgs e)
