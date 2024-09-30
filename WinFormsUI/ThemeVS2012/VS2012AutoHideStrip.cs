@@ -29,13 +29,21 @@ namespace WeifenLuo.WinFormsUI.Docking
             public bool IsMouseOver { get; set; }
         }
 
-        private const int TextGapLeft = 0;
-        private const int TextGapRight = 0;
-        private const int TextGapBottom = 3;
-        private const int TabGapTop = 3;
-        private const int TabGapBottom = 8;
-        private const int TabGapLeft = 0;
-        private const int TabGapBetween = 12;
+        private const int _TextGapLeft = 0;
+        private const int _TextGapRight = 0;
+        private const int _TextGapBottom = 3;
+        private const int _TabGapTop = 3;
+        private const int _TabGapBottom = 8;
+        private const int _TabGapLeft = 0;
+        private const int _TabGapBetween = 12;
+
+        private int TextGapLeft => LogicalToDeviceUnits(_TextGapLeft);
+        private int TextGapRight => LogicalToDeviceUnits(_TextGapRight);
+        private int TextGapBottom => LogicalToDeviceUnits(_TextGapBottom);
+        private int TabGapTop => LogicalToDeviceUnits(_TabGapTop);
+        private int TabGapBottom => LogicalToDeviceUnits(_TabGapBottom);
+        private int TabGapLeft => LogicalToDeviceUnits(_TabGapLeft);
+        private int TabGapBetween => LogicalToDeviceUnits(_TabGapBetween);
 
         #region Customizable Properties
         public Font TextFont => m_fontManager.Font;
@@ -283,10 +291,11 @@ namespace WeifenLuo.WinFormsUI.Docking
         private Rectangle GetBorderRectangle(Rectangle tab, DockState state, int width)
         {
             var result = new Rectangle(tab.Location, tab.Size);
+            var autoHideTabLineWidth = LogicalToDeviceUnits(DockPanel.Theme.Measures.AutoHideTabLineWidth);
             if (state == DockState.DockLeftAutoHide)
             {
                 result.Height = width;
-                result.Width = DockPanel.Theme.Measures.AutoHideTabLineWidth;
+                result.Width = autoHideTabLineWidth;
                 result.Y += TextGapLeft;
                 return result;
             }
@@ -294,7 +303,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (state == DockState.DockRightAutoHide)
             {
                 result.Height = width;
-                result.Width = DockPanel.Theme.Measures.AutoHideTabLineWidth;
+                result.Width = autoHideTabLineWidth;
                 result.X += tab.Width - result.Width;
                 result.Y += TextGapLeft;
                 return result;
@@ -303,7 +312,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (state == DockState.DockBottomAutoHide)
             {
                 result.Width = width;
-                result.Height = DockPanel.Theme.Measures.AutoHideTabLineWidth;
+                result.Height = autoHideTabLineWidth;
                 result.X += TextGapLeft;
                 result.Y += tab.Height - result.Height;
                 return result;
@@ -312,7 +321,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (state == DockState.DockTopAutoHide)
             {
                 result.Width = width;
-                result.Height = DockPanel.Theme.Measures.AutoHideTabLineWidth;
+                result.Height = autoHideTabLineWidth;
                 result.X += TextGapLeft;
                 return result;
             }

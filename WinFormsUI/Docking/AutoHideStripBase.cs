@@ -369,8 +369,8 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                int standard = MeasureHeight();
-                var padding = DockPanel.Theme.Measures.DockPadding;
+                int standard = LogicalToDeviceUnits(MeasureHeight());
+                var padding = LogicalToDeviceUnits(DockPanel.Theme.Measures.DockPadding);
                 var width = PanesLeft.Count > 0 ? standard : padding;
                 var height = PanesTop.Count > 0 ? standard : padding;
                 return new Rectangle(0, 0, width, height);
@@ -384,8 +384,8 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                int standard = MeasureHeight();
-                var padding = DockPanel.Theme.Measures.DockPadding;
+                int standard = LogicalToDeviceUnits(MeasureHeight());
+                var padding = LogicalToDeviceUnits(DockPanel.Theme.Measures.DockPadding);
                 var width = PanesRight.Count > 0 ? standard : padding;
                 var height = PanesTop.Count > 0 ? standard : padding;
                 return new Rectangle(Width - width, 0, width, height);
@@ -399,8 +399,8 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                int standard = MeasureHeight();
-                var padding = DockPanel.Theme.Measures.DockPadding;
+                int standard = LogicalToDeviceUnits(MeasureHeight());
+                var padding = LogicalToDeviceUnits(DockPanel.Theme.Measures.DockPadding);
                 var width = PanesLeft.Count > 0 ? standard : padding;
                 var height = PanesBottom.Count > 0 ? standard : padding;
                 return new Rectangle(0, Height - height, width, height);
@@ -414,8 +414,8 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                int standard = MeasureHeight();
-                var padding = DockPanel.Theme.Measures.DockPadding;
+                int standard = LogicalToDeviceUnits(MeasureHeight());
+                var padding = LogicalToDeviceUnits(DockPanel.Theme.Measures.DockPadding);
                 var width = PanesRight.Count > 0 ? standard : padding;
                 var height = PanesBottom.Count > 0 ? standard : padding;
                 return new Rectangle(Width - width, Height - height, width, height);

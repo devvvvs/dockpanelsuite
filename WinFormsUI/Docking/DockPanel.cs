@@ -642,20 +642,21 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         public int GetDockWindowSize(DockState dockState)
         {
+            var minSize = LogicalToDeviceUnits(MeasurePane.MinSize);
             if (dockState == DockState.DockLeft || dockState == DockState.DockRight)
             {
                 int width = ClientRectangle.Width - DockPadding.Left - DockPadding.Right;
                 int dockLeftSize = m_dockLeftPortion >= 1 ? (int)m_dockLeftPortion : (int)(width * m_dockLeftPortion);
                 int dockRightSize = m_dockRightPortion >= 1 ? (int)m_dockRightPortion : (int)(width * m_dockRightPortion);
 
-                if (dockLeftSize < MeasurePane.MinSize)
-                    dockLeftSize = MeasurePane.MinSize;
-                if (dockRightSize < MeasurePane.MinSize)
-                    dockRightSize = MeasurePane.MinSize;
+                if (dockLeftSize < minSize)
+                    dockLeftSize = minSize;
+                if (dockRightSize < minSize)
+                    dockRightSize = minSize;
 
-                if (dockLeftSize + dockRightSize > width - MeasurePane.MinSize)
+                if (dockLeftSize + dockRightSize > width - minSize)
                 {
-                    int adjust = (dockLeftSize + dockRightSize) - (width - MeasurePane.MinSize);
+                    int adjust = (dockLeftSize + dockRightSize) - (width - minSize);
                     dockLeftSize -= adjust / 2;
                     dockRightSize -= adjust / 2;
                 }
@@ -669,14 +670,14 @@ namespace WeifenLuo.WinFormsUI.Docking
                 int dockTopSize = m_dockTopPortion >= 1 ? (int)m_dockTopPortion : (int)(height * m_dockTopPortion);
                 int dockBottomSize = m_dockBottomPortion >= 1 ? (int)m_dockBottomPortion : (int)(height * m_dockBottomPortion);
 
-                if (dockTopSize < MeasurePane.MinSize)
-                    dockTopSize = MeasurePane.MinSize;
-                if (dockBottomSize < MeasurePane.MinSize)
-                    dockBottomSize = MeasurePane.MinSize;
+                if (dockTopSize < minSize)
+                    dockTopSize = minSize;
+                if (dockBottomSize < minSize)
+                    dockBottomSize = minSize;
 
-                if (dockTopSize + dockBottomSize > height - MeasurePane.MinSize)
+                if (dockTopSize + dockBottomSize > height - minSize)
                 {
-                    int adjust = (dockTopSize + dockBottomSize) - (height - MeasurePane.MinSize);
+                    int adjust = (dockTopSize + dockBottomSize) - (height - minSize);
                     dockTopSize -= adjust / 2;
                     dockBottomSize -= adjust / 2;
                 }
@@ -777,8 +778,8 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private void CalculateDockPadding()
         {
-            DockPadding.All = Theme.Measures.DockPadding;
-            int standard = AutoHideStripControl.MeasureHeight();
+            DockPadding.All = LogicalToDeviceUnits(Theme.Measures.DockPadding);
+            int standard = LogicalToDeviceUnits(AutoHideStripControl.MeasureHeight());
             if (AutoHideStripControl.GetNumberOfPanes(DockState.DockLeftAutoHide) > 0)
                 DockPadding.Left = standard;
             if (AutoHideStripControl.GetNumberOfPanes(DockState.DockRightAutoHide) > 0)

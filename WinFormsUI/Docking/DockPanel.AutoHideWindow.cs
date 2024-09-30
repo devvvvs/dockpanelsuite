@@ -26,7 +26,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                 protected override int SplitterSize
                 {
-                    get { return AutoHideWindow.DockPanel.Theme.Measures.AutoHideSplitterSize; }
+                    get { return LogicalToDeviceUnits(AutoHideWindow.DockPanel.Theme.Measures.AutoHideSplitterSize); }
                 }
 
                 protected override void StartDrag()
@@ -192,20 +192,21 @@ namespace WeifenLuo.WinFormsUI.Docking
                     Rectangle rect = ClientRectangle;
 
                     // exclude the border and the splitter
+                    var splitterSize = LogicalToDeviceUnits(2 + DockPanel.Theme.Measures.AutoHideSplitterSize);
                     if (DockState == DockState.DockBottomAutoHide)
                     {
-                        rect.Y += 2 + DockPanel.Theme.Measures.AutoHideSplitterSize;
-                        rect.Height -= 2 + DockPanel.Theme.Measures.AutoHideSplitterSize;
+                        rect.Y += splitterSize;
+                        rect.Height -= splitterSize;
                     }
                     else if (DockState == DockState.DockRightAutoHide)
                     {
-                        rect.X += 2 + DockPanel.Theme.Measures.AutoHideSplitterSize;
-                        rect.Width -= 2 + DockPanel.Theme.Measures.AutoHideSplitterSize;
+                        rect.X += splitterSize;
+                        rect.Width -= splitterSize;
                     }
                     else if (DockState == DockState.DockTopAutoHide)
-                        rect.Height -= 2 + DockPanel.Theme.Measures.AutoHideSplitterSize;
+                        rect.Height -= splitterSize;
                     else if (DockState == DockState.DockLeftAutoHide)
-                        rect.Width -= 2 + DockPanel.Theme.Measures.AutoHideSplitterSize;
+                        rect.Width -= splitterSize;
 
                     return rect;
                 }
@@ -274,13 +275,13 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                     if ((this as ISplitterDragSource).IsVertical)
                     {
-                        rectLimit.X += MeasurePane.MinSize;
-                        rectLimit.Width -= 2 * MeasurePane.MinSize;
+                        rectLimit.X += LogicalToDeviceUnits(MeasurePane.MinSize);
+                        rectLimit.Width -= LogicalToDeviceUnits(2 * MeasurePane.MinSize);
                     }
                     else
                     {
-                        rectLimit.Y += MeasurePane.MinSize;
-                        rectLimit.Height -= 2 * MeasurePane.MinSize;
+                        rectLimit.Y += LogicalToDeviceUnits(MeasurePane.MinSize);
+                        rectLimit.Height -= LogicalToDeviceUnits(2 * MeasurePane.MinSize);
                     }
 
                     return DockPanel.RectangleToScreen(rectLimit);
@@ -362,13 +363,15 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                 Rectangle rect = Rectangle.Empty;
                 double autoHideSize = ActiveAutoHideContent.DockHandler.AutoHidePortion;
+                var minSize = LogicalToDeviceUnits(MeasurePane.MinSize);
+                var dockPadding = LogicalToDeviceUnits(Theme.Measures.DockPadding);
                 if (state == DockState.DockLeftAutoHide)
                 {
                     if (autoHideSize < 1)
                         autoHideSize = rectDockArea.Width * autoHideSize;
-                    if (autoHideSize > rectDockArea.Width - MeasurePane.MinSize)
-                        autoHideSize = rectDockArea.Width - MeasurePane.MinSize;
-                    rect.X = rectDockArea.X - Theme.Measures.DockPadding;
+                    if (autoHideSize > rectDockArea.Width - minSize)
+                        autoHideSize = rectDockArea.Width - minSize;
+                    rect.X = rectDockArea.X - dockPadding;
                     rect.Y = rectDockArea.Y;
                     rect.Width = (int)autoHideSize;
                     rect.Height = rectDockArea.Height;
@@ -377,9 +380,9 @@ namespace WeifenLuo.WinFormsUI.Docking
                 {
                     if (autoHideSize < 1)
                         autoHideSize = rectDockArea.Width * autoHideSize;
-                    if (autoHideSize > rectDockArea.Width - MeasurePane.MinSize)
-                        autoHideSize = rectDockArea.Width - MeasurePane.MinSize;
-                    rect.X = rectDockArea.X + rectDockArea.Width - (int)autoHideSize + Theme.Measures.DockPadding;
+                    if (autoHideSize > rectDockArea.Width - minSize)
+                        autoHideSize = rectDockArea.Width - minSize;
+                    rect.X = rectDockArea.X + rectDockArea.Width - (int)autoHideSize + dockPadding;
                     rect.Y = rectDockArea.Y;
                     rect.Width = (int)autoHideSize;
                     rect.Height = rectDockArea.Height;
@@ -388,10 +391,10 @@ namespace WeifenLuo.WinFormsUI.Docking
                 {
                     if (autoHideSize < 1)
                         autoHideSize = rectDockArea.Height * autoHideSize;
-                    if (autoHideSize > rectDockArea.Height - MeasurePane.MinSize)
-                        autoHideSize = rectDockArea.Height - MeasurePane.MinSize;
+                    if (autoHideSize > rectDockArea.Height - minSize)
+                        autoHideSize = rectDockArea.Height - minSize;
                     rect.X = rectDockArea.X;
-                    rect.Y = rectDockArea.Y - Theme.Measures.DockPadding;
+                    rect.Y = rectDockArea.Y - dockPadding;
                     rect.Width = rectDockArea.Width;
                     rect.Height = (int)autoHideSize;
                 }
@@ -399,10 +402,10 @@ namespace WeifenLuo.WinFormsUI.Docking
                 {
                     if (autoHideSize < 1)
                         autoHideSize = rectDockArea.Height * autoHideSize;
-                    if (autoHideSize > rectDockArea.Height - MeasurePane.MinSize)
-                        autoHideSize = rectDockArea.Height - MeasurePane.MinSize;
+                    if (autoHideSize > rectDockArea.Height - minSize)
+                        autoHideSize = rectDockArea.Height - minSize;
                     rect.X = rectDockArea.X;
-                    rect.Y = rectDockArea.Y + rectDockArea.Height - (int)autoHideSize + Theme.Measures.DockPadding;
+                    rect.Y = rectDockArea.Y + rectDockArea.Height - (int)autoHideSize + dockPadding;
                     rect.Width = rectDockArea.Width;
                     rect.Height = (int)autoHideSize;
                 }

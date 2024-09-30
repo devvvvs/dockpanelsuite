@@ -21,23 +21,24 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
                 Rectangle rect = ClientRectangle;
 
                 // exclude the border and the splitter
+                var splitterSize = LogicalToDeviceUnits(DockPanel.Theme.Measures.AutoHideSplitterSize);
                 if (DockState == DockState.DockBottomAutoHide)
                 {
-                    rect.Y += DockPanel.Theme.Measures.AutoHideSplitterSize;
-                    rect.Height -= DockPanel.Theme.Measures.AutoHideSplitterSize;
+                    rect.Y += splitterSize;
+                    rect.Height -= splitterSize;
                 }
                 else if (DockState == DockState.DockRightAutoHide)
                 {
-                    rect.X += DockPanel.Theme.Measures.AutoHideSplitterSize;
-                    rect.Width -= DockPanel.Theme.Measures.AutoHideSplitterSize;
+                    rect.X += splitterSize;
+                    rect.Width -= splitterSize;
                 }
                 else if (DockState == DockState.DockTopAutoHide)
                 {
-                    rect.Height -= DockPanel.Theme.Measures.AutoHideSplitterSize;
+                    rect.Height -= splitterSize;
                 }
                 else if (DockState == DockState.DockLeftAutoHide)
                 {
-                    rect.Width -= DockPanel.Theme.Measures.AutoHideSplitterSize;
+                    rect.Width -= splitterSize;
                 }
 
                 return rect;

@@ -79,13 +79,13 @@ namespace WeifenLuo.WinFormsUI.Docking
                     Rectangle rectLimit = Parent.RectangleToScreen(status.LogicalBounds);
                     if (((ISplitterDragSource)this).IsVertical)
                     {
-                        rectLimit.X += MeasurePane.MinSize;
-                        rectLimit.Width -= 2 * MeasurePane.MinSize;
+                        rectLimit.X += LogicalToDeviceUnits(MeasurePane.MinSize);
+                        rectLimit.Width -= LogicalToDeviceUnits(2 * MeasurePane.MinSize);
                     }
                     else
                     {
-                        rectLimit.Y += MeasurePane.MinSize;
-                        rectLimit.Height -= 2 * MeasurePane.MinSize;
+                        rectLimit.Y += LogicalToDeviceUnits(MeasurePane.MinSize);
+                        rectLimit.Height -= LogicalToDeviceUnits(2 * MeasurePane.MinSize);
                     }
 
                     return rectLimit;

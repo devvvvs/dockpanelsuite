@@ -173,16 +173,16 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                 if (((ISplitterDragSource)this).IsVertical)
                 {
-                    rectLimit.X += MeasurePane.MinSize;
-                    rectLimit.Width -= 2 * MeasurePane.MinSize;
+                    rectLimit.X += LogicalToDeviceUnits(MeasurePane.MinSize);
+                    rectLimit.Width -= LogicalToDeviceUnits(2 * MeasurePane.MinSize);
                     rectLimit.Y = location.Y;
                     if ((Control.ModifierKeys & Keys.Shift) == 0)
                         rectLimit.Height = Height;
                 }
                 else
                 {
-                    rectLimit.Y += MeasurePane.MinSize;
-                    rectLimit.Height -= 2 * MeasurePane.MinSize;
+                    rectLimit.Y += LogicalToDeviceUnits(MeasurePane.MinSize);
+                    rectLimit.Height -= LogicalToDeviceUnits(2 * MeasurePane.MinSize);
                     rectLimit.X = location.X;
                     if ((Control.ModifierKeys & Keys.Shift) == 0)
                         rectLimit.Width = Width;

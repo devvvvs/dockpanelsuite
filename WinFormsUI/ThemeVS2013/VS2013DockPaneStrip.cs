@@ -887,7 +887,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
                 return;
 
             Rectangle rectTabStrip = new Rectangle(TabStripRectangle.Location, TabStripRectangle.Size);
-            rectTabStrip.Height += 1;
+            rectTabStrip.Height += LogicalToDeviceUnits(1);
 
             // Draw the tabs
             Rectangle rectTabOnly = TabsRectangle;
@@ -1303,7 +1303,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
 
             int gap = LogicalToDeviceUnits(3);
             var imageSize = LogicalToDeviceUnits(15);
-            return new Rectangle(rectTab.X + rectTab.Width - imageSize - gap - 1, rectTab.Y + gap, imageSize, imageSize);
+            return new Rectangle(rectTab.X + rectTab.Width - imageSize - gap - LogicalToDeviceUnits(1), rectTab.Y + gap, imageSize, imageSize);
         }
 
         private void WindowList_Click(object sender, EventArgs e)
