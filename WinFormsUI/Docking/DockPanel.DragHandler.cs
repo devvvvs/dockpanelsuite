@@ -46,7 +46,8 @@ namespace WeifenLuo.WinFormsUI.Docking
                 }
 
                 DragControl.FindForm().Capture = true;
-                AssignHandle(DragControl.FindForm().Handle);
+                // Not sure what this line is supposed to do, but it caused AppWindow from Windows App SDK to stop working
+                //AssignHandle(DragControl.FindForm().Handle);
                 if (PatchController.EnableActiveXFix == false)
                 {
                     Application.AddMessageFilter(this);
