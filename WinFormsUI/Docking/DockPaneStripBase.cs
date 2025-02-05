@@ -293,20 +293,20 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == (int)Win32.Msgs.WM_LBUTTONDBLCLK)
-            {
-                base.WndProc(ref m);
+            //if (m.Msg == (int)Win32.Msgs.WM_LBUTTONDBLCLK)
+            //{
+            //    base.WndProc(ref m);
 
-                int index = HitTest();
-                if (DockPane.DockPanel.AllowEndUserDocking && index != -1)
-                {
-                    IDockContent content = Tabs[index].Content;
-                    if (content.DockHandler.CheckDockState(!content.DockHandler.IsFloat) != DockState.Unknown)
-                        content.DockHandler.IsFloat = !content.DockHandler.IsFloat;	
-                }
+            //    int index = HitTest();
+            //    if (DockPane.DockPanel.AllowEndUserDocking && index != -1)
+            //    {
+            //        IDockContent content = Tabs[index].Content;
+            //        if (content.DockHandler.CheckDockState(!content.DockHandler.IsFloat) != DockState.Unknown)
+            //            content.DockHandler.IsFloat = !content.DockHandler.IsFloat;	
+            //    }
 
-                return;
-            }
+            //    return;
+            //}
 
             base.WndProc(ref m);
             return;

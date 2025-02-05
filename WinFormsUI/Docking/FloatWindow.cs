@@ -243,32 +243,32 @@ namespace WeifenLuo.WinFormsUI.Docking
                         }
                     }
                     return;
-                case (int)Win32.Msgs.WM_NCLBUTTONDBLCLK:
-                    {
-                        uint result = !DoubleClickTitleBarToDock || Win32Helper.IsRunningOnMono 
-                            ? Win32Helper.HitTestCaption(this)
-                            : NativeMethods.SendMessage(this.Handle, (int)Win32.Msgs.WM_NCHITTEST, 0, (uint)m.LParam);
+                //case (int)Win32.Msgs.WM_NCLBUTTONDBLCLK:
+                //    {
+                //        uint result = !DoubleClickTitleBarToDock || Win32Helper.IsRunningOnMono 
+                //            ? Win32Helper.HitTestCaption(this)
+                //            : NativeMethods.SendMessage(this.Handle, (int)Win32.Msgs.WM_NCHITTEST, 0, (uint)m.LParam);
 
-                        if (result != 2)	// HITTEST_CAPTION
-                        {
-                            base.WndProc(ref m);
-                            return;
-                        }
+                //        if (result != 2)	// HITTEST_CAPTION
+                //        {
+                //            base.WndProc(ref m);
+                //            return;
+                //        }
 
-                        DockPanel.SuspendLayout(true);
+                //        DockPanel.SuspendLayout(true);
 
-                        // Restore to panel
-                        foreach (DockPane pane in NestedPanes)
-                        {
-                            if (pane.DockState != DockState.Float)
-                                continue;
-                            pane.RestoreToPanel();
-                        }
+                //        // Restore to panel
+                //        foreach (DockPane pane in NestedPanes)
+                //        {
+                //            if (pane.DockState != DockState.Float)
+                //                continue;
+                //            pane.RestoreToPanel();
+                //        }
 
 
-                        DockPanel.ResumeLayout(true, true);
-                        return;
-                    }
+                //        DockPanel.ResumeLayout(true, true);
+                //        return;
+                //    }
                 case WM_CHECKDISPOSE:
                     if (NestedPanes.Count == 0)
                         Dispose();
