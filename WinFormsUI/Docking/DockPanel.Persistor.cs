@@ -519,7 +519,8 @@ namespace WeifenLuo.WinFormsUI.Docking
                 PaneStruct[] panes;
                 DockWindowStruct[] dockWindows;
                 FloatWindowStruct[] floatWindows;
-                using (var xmlIn = new XmlTextReader(stream) { WhitespaceHandling = WhitespaceHandling.None })
+                using var reader = new StreamReader(stream, leaveOpen: true);
+                using (var xmlIn = new XmlTextReader(reader) { WhitespaceHandling = WhitespaceHandling.None })
                 {
                     xmlIn.MoveToContent();
 
