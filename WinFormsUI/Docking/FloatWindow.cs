@@ -169,19 +169,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        protected override void SetBoundsCore(int x, int y, int width, int height, BoundsSpecified specified)
-        {
-            Rectangle rectWorkArea = SystemInformation.VirtualScreen;
-
-            if (y + height > rectWorkArea.Bottom)
-                y -= (y + height) - rectWorkArea.Bottom;
-
-            if (y < rectWorkArea.Top)
-                y += rectWorkArea.Top - y;
-
-            base.SetBoundsCore (x, y, width, height, specified);
-        }
-
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
