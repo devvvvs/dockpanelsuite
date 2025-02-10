@@ -237,7 +237,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             base.OnMouseMove(e);
 
-            if (e.Button != MouseButtons.Left || _dragBox.Contains(e.Location)) 
+            if (e.Button != MouseButtons.Left || _dragBox.Contains(e.Location) || HitTest() == -1) 
                 return;
 
             if (DockPane.ActiveContent == null)
