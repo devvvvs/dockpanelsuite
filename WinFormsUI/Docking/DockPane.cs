@@ -1258,13 +1258,8 @@ namespace WeifenLuo.WinFormsUI.Docking
         Rectangle IDockDragSource.BeginDrag(Point ptMouse)
         {
             Point location = PointToScreen(new Point(0, 0));
-            Size size;
 
-            DockPane floatPane = ActiveContent.DockHandler.FloatPane;
-            if (DockState == DockState.Float || floatPane == null || floatPane.FloatWindow.NestedPanes.Count != 1)
-                size = DockPanel.LogicalToDeviceUnits(DockPanel.DefaultFloatWindowSize);
-            else
-                size = floatPane.FloatWindow.Size;
+            var size = ClientSize;
 
             if (ptMouse.X > location.X + size.Width)
                 location.X += ptMouse.X - (location.X + size.Width) + DockPanel.LogicalToDeviceUnits(DockPanel.Theme.Measures.SplitterSize);
