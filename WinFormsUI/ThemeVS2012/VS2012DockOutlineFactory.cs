@@ -19,8 +19,8 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012
                 m_dragForm = new DragForm();
                 SetDragForm(Rectangle.Empty);
                 // IMPORTANT: this color does not come from palette.
-                DragForm.BackColor = ColorTranslator.FromHtml("#FFC2C2C2");
-                DragForm.BackgroundColor = ColorTranslator.FromHtml("#FF5BADFF");
+                DragForm.BackColor = Color.Gray; // ColorTranslator.FromHtml("#FFC2C2C2");
+                DragForm.BackgroundColor = Color.DarkGray; //ColorTranslator.FromHtml("#FF5BADFF");
                 DragForm.Opacity = 0.5;
                 DragForm.Show(false);
             }
