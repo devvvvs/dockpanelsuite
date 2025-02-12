@@ -28,13 +28,15 @@ public sealed class DpiAwareFontManager
             m_font?.Dispose();
             m_iconFont?.Dispose();
             m_font = null;
+            m_iconFont = null;
         }
 
         void Control_DpiChangedAfterParent(object? sender, EventArgs e)
         {
             m_font?.Dispose();
-            m_iconFont.Dispose();
+            m_iconFont?.Dispose();
             m_font = null;
+            m_iconFont = null;
         }
     }
 
