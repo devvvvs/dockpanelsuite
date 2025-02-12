@@ -47,6 +47,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         private DockStripBackground m_DockStripBackground = new DockStripBackground();
         
         private Font m_textFont = SystemFonts.MenuFont;
+        private Font m_iconFont = new Font("SegoeUI", 14);
 
         /// <summary>
         /// The gradient color skin for the DockStrips.
@@ -83,6 +84,15 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get { return m_textFont; }
             set { m_textFont = value; }
+        }
+
+        /// <summary>
+        /// Font used in AutoHideStrip elements.
+        /// </summary>
+        public Font IconFont
+        {
+            get { return m_iconFont; }
+            set { m_iconFont = value; }
         }
     }
 

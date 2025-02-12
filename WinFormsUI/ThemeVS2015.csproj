@@ -19,6 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="FontHelper.cs" />
     <Compile Include="ThemeVS2012\ImageService.cs" />
     <Compile Include="ThemeVS2012\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

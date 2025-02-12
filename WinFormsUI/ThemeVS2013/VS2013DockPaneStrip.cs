@@ -508,7 +508,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
 
             SuspendLayout();
 
-            m_fontManager = new DpiAwareFontManager(pane.DockPanel.Theme.Skin.DockPaneStripSkin.TextFont, pane.DockPanel);
+            m_fontManager = new DpiAwareFontManager(pane.DockPanel.Theme.Skin.DockPaneStripSkin.TextFont, null, pane.DockPanel);
             m_components = new Container();
             m_toolTip = new ToolTip(Components);
             m_selectMenu = new ContextMenuStrip(Components);

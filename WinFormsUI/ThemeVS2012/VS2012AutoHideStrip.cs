@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
@@ -47,6 +47,8 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         #region Customizable Properties
         public Font TextFont => m_fontManager.Font;
+
+        public Font IconFont => m_fontManager.IconFont;
 
         private static StringFormat _stringFormatTabHorizontal;
         private StringFormat StringFormatTabHorizontal
@@ -140,7 +142,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 ControlStyles.AllPaintingInWmPaint |
                 ControlStyles.OptimizedDoubleBuffer, true);
             BackColor = DockPanel.Theme.ColorPalette.MainWindowActive.Background;
-            m_fontManager = new DpiAwareFontManager(panel.Theme.Skin.AutoHideStripSkin.TextFont, panel);
+            m_fontManager = new DpiAwareFontManager(panel.Theme.Skin.AutoHideStripSkin.TextFont, panel.Theme.Skin.AutoHideStripSkin.IconFont, panel);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -206,8 +208,9 @@ namespace WeifenLuo.WinFormsUI.Docking
             {
                 foreach (TabVS2012 tab in pane.AutoHideTabs)
                 {
-                    int width = TextRenderer.MeasureText(tab.Content.DockHandler.TabText, TextFont).Width +
-                        TextGapLeft + TextGapRight;
+                    var label = tab.Content.DockHandler.TabText;
+                    var font = FontHelper.TextToMeasure(ref label, TextFont, IconFont);
+                    int width = TextRenderer.MeasureText(label, font).Width + TextGapLeft + TextGapRight;
                     tab.TabX = x;
                     tab.TabWidth = width;
                     x += width + TabGapBetween;
@@ -242,6 +245,8 @@ namespace WeifenLuo.WinFormsUI.Docking
             return GraphicsPath;
         }
 
+        
+
         private void DrawTab(Graphics g, TabVS2012 tab)
         {
             Rectangle rectTabOrigin = GetTabRectangle(tab);
@@ -273,17 +278,29 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             g.FillRectangle(DockPanel.Theme.PaintingService.GetBrush(backgroundColor), rectTabOrigin);
 
-            Rectangle rectBorder = GetBorderRectangle(rectTabOrigin, dockState, TextRenderer.MeasureText(tab.Content.DockHandler.TabText, TextFont).Width);
+            var label = content.DockHandler.TabText;
+            var font = FontHelper.TextToMeasure(ref label, TextFont, IconFont);
+            var drawIcon = label != content.DockHandler.TabText;
+            Rectangle rectBorder = GetBorderRectangle(rectTabOrigin, dockState, TextRenderer.MeasureText(label, font).Width);
             g.FillRectangle(DockPanel.Theme.PaintingService.GetBrush(borderColor), rectBorder);
 
             // Draw the text
             Rectangle rectText = GetTextRectangle(rectTabOrigin, dockState);
 
             if (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockRightAutoHide)
-                g.DrawString(content.DockHandler.TabText, TextFont, DockPanel.Theme.PaintingService.GetBrush(textColor), rectText, StringFormatTabVertical);
+            {
+                if (drawIcon)
+                    TextRenderer.DrawText(g, label, font, rectText.Location, textColor);
+                else
+                    g.DrawString(label, font, DockPanel.Theme.PaintingService.GetBrush(textColor), rectText, StringFormatTabVertical);
+            }
             else
-                g.DrawString(content.DockHandler.TabText, TextFont, DockPanel.Theme.PaintingService.GetBrush(textColor), rectText, StringFormatTabHorizontal);
-
+            {
+                if (drawIcon)
+                    TextRenderer.DrawText(g, label, font, rectText.Location, textColor);
+                else
+                    g.DrawString(label, font, DockPanel.Theme.PaintingService.GetBrush(textColor), rectText, StringFormatTabHorizontal);
+            }
             // Set rotate back
             g.Transform = matrixRotate;
         }
