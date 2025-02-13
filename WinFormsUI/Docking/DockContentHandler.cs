@@ -1138,7 +1138,12 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         Rectangle IDockDragSource.BeginDrag(Point ptMouse)
         {
-            var size = Pane.ClientSize;
+            Size size;
+            DockPane floatPane = this.FloatPane;
+            if (DockState == DockState.Float || floatPane == null || floatPane.FloatWindow.NestedPanes.Count != 1)
+                size = Pane.ClientSize;
+            else
+                size = floatPane.FloatWindow.Size;
 
             Point location;
             Rectangle rectPane = Pane.ClientRectangle;

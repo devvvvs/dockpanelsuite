@@ -1259,7 +1259,12 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             Point location = PointToScreen(new Point(0, 0));
 
-            var size = ClientSize;
+            Size size;
+            DockPane floatPane = ActiveContent.DockHandler.FloatPane;
+            if (DockState == DockState.Float || floatPane == null || floatPane.FloatWindow.NestedPanes.Count != 1)
+                size = ClientSize;
+            else
+                size = floatPane.FloatWindow.Size;
 
             if (ptMouse.X > location.X + size.Width)
                 location.X += ptMouse.X - (location.X + size.Width) + DockPanel.LogicalToDeviceUnits(DockPanel.Theme.Measures.SplitterSize);
