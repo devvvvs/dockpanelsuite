@@ -3,10 +3,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: CLSCompliant(true)]
-
 [assembly: ComVisible(false)]
 
 [assembly: Guid("9d690ef9-ce19-4c69-874c-e24d8eb36aff")]

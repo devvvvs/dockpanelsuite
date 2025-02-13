@@ -1,8 +1,11 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Security.Permissions;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
+using Windows.Win32.UI.WindowsAndMessaging;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 
 namespace WeifenLuo.WinFormsUI.Docking
 {
@@ -178,7 +181,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         if (IsDisposed)
                             return;
 
-                        uint result = Win32Helper.IsRunningOnMono ? 0 : NativeMethods.SendMessage(this.Handle, (int)Win32.Msgs.WM_NCHITTEST, 0, (uint)m.LParam);
+                        var result = Win32Helper.IsRunningOnMono ? 0 : Win32Helper.HitTestFix((HWND)Handle, m.LParam);
                         if (result == 2 && DockPanel.AllowEndUserDocking && this.AllowEndUserDocking)	// HITTEST_CAPTION
                         {
                             Activate();
