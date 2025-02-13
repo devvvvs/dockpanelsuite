@@ -60,23 +60,23 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
     
-        protected override void WndProc(ref Message m)
-        {
-            if (m.Msg == (int)Win32.Msgs.WM_LBUTTONDBLCLK)
-            {
-                if (DockHelper.IsDockStateAutoHide(DockPane.DockState))
-                {
-                    DockPane.DockPanel.ActiveAutoHideContent = null;
-                    return;
-                }
+        //protected override void WndProc(ref Message m)
+        //{
+        //    if (m.Msg == (int)Win32.Msgs.WM_LBUTTONDBLCLK)
+        //    {
+        //        if (DockHelper.IsDockStateAutoHide(DockPane.DockState))
+        //        {
+        //            DockPane.DockPanel.ActiveAutoHideContent = null;
+        //            return;
+        //        }
 
-                if (DockPane.IsFloat)
-                    DockPane.RestoreToPanel();
-                else
-                    DockPane.Float();
-            }
-            base.WndProc(ref m);
-        }
+        //        if (DockPane.IsFloat)
+        //            DockPane.RestoreToPanel();
+        //        else
+        //            DockPane.Float();
+        //    }
+        //    base.WndProc(ref m);
+        //}
 
         internal void RefreshChanges()
         {
