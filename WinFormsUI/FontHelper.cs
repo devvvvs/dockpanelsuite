@@ -16,6 +16,11 @@ namespace WeifenLuo.WinFormsUI
                 text = "⚙️";
                 return iconFont;
             }
+            else if (text == "About")
+            {
+                text = "🅰️";
+                return iconFont; 
+            }
             return textFont;
         }
     }
