@@ -174,7 +174,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             get
             {
                 if (RightToLeft == RightToLeft.No)
-                    return _textFormat;
+                    return _textFormat | TextFormatFlags.NoPrefix;
                 else
                     return _textFormat | TextFormatFlags.RightToLeft | TextFormatFlags.Right;
             }
