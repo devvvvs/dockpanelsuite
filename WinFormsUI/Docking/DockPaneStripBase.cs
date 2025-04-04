@@ -67,6 +67,9 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
+        public Action<Point, String> OnShowTooltip;
+        public Action OnHideTooltip;
+
         [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]        
         protected sealed class TabCollection : IEnumerable<Tab>
         {
@@ -264,6 +267,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 // Close the specified content.
                 IDockContent content = Tabs[index].Content;
                 DockPane.CloseContent(content);
+                OnHideTooltip?.Invoke();
                 if (PatchController.EnableSelectClosestOnClose == true)
                     SelectClosestPane(index);
 

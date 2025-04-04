@@ -1229,6 +1229,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
                 IsMouseDown = true;
         }
 
+        int lastIndex = -1;
         protected override void OnMouseMove(MouseEventArgs e)
         {
             if (!this.m_suspendDrag)
@@ -1257,21 +1258,29 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
                 var closeButtonRect = GetCloseButtonRect(tabRect);
                 var mouseRect = new Rectangle(mousePos, new Size(1, 1));
                 buttonUpdate = SetActiveClose(closeButtonRect.IntersectsWith(mouseRect) ? closeButtonRect : Rectangle.Empty);
+
+                if (index != lastIndex)
+                { 
+                    OnHideTooltip?.Invoke();
+                    var pt = new Point(tabRect.X + 10, tabRect.Y + tabRect.Height + 10);
+                    OnShowTooltip?.Invoke(this.PointToScreen(pt), toolTip);
+                }
             }
             else
             {
                 tabUpdate = SetMouseOverTab(null);
                 buttonUpdate = SetActiveClose(Rectangle.Empty);
             }
+            lastIndex = index;
 
             if (tabUpdate || buttonUpdate)
                 Invalidate();
 
             if (m_toolTip.GetToolTip(this) != toolTip)
             {
-                m_toolTip.Active = false;
-                m_toolTip.SetToolTip(this, toolTip);
-                m_toolTip.Active = true;
+                //m_toolTip.Active = false;
+                //m_toolTip.SetToolTip(this, toolTip);
+                //m_toolTip.Active = true;
             }
         }
 
@@ -1488,6 +1497,9 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2013
 
         protected override void OnMouseLeave(EventArgs e)
         {
+            lastIndex = -1;
+            OnHideTooltip?.Invoke();
+
             var tabUpdate = SetMouseOverTab(null);
             var buttonUpdate = SetActiveClose(Rectangle.Empty);
             if (tabUpdate || buttonUpdate)
