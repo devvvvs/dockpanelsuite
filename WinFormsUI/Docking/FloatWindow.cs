@@ -275,7 +275,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             if (VisibleNestedPanes.Count == 0)
             {
-                ControlBox = true;
+                SetControlBox(true);
                 return;
             }
 
@@ -290,15 +290,21 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                     if (content.DockHandler.CloseButton && content.DockHandler.CloseButtonVisible)
                     {
-                        ControlBox = true;
+                        SetControlBox(true);
                         return;
                     }
                 }
             }
-            //Only if there is a ControlBox do we turn it off
-            //old code caused a flash of the window.
-            if (ControlBox)
-                ControlBox = false;
+
+            SetControlBox(false);
+        }
+
+        private void SetControlBox(bool value)
+        {
+            // Setter of ControlBox property triggers window style change - trigger only when actually changing its state or
+            // see flashes or minimized/maximized state mixups due to event cascades.
+            if (value != ControlBox)
+                ControlBox = value;
         }
 
         public virtual Rectangle DisplayingRectangle

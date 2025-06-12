@@ -193,6 +193,12 @@ namespace WeifenLuo.WinFormsUI.Docking
                 DockContentHandler handler = content.DockHandler;
                 if (handler.Form.IsDisposed)
                     return; // Should not reach here, but better than throwing an exception
+
+                // Ensure window is not minimized (Activate will not bring it out of minimized state)
+                var window = handler.Form.ParentForm ?? handler.Form;
+                if (window.WindowState == FormWindowState.Minimized)
+                    window.WindowState = FormWindowState.Normal;
+
                 if (ContentContains(content, handler.ActiveWindowHandle))
                 {
                     if (!Win32Helper.IsRunningOnMono)
@@ -204,8 +210,9 @@ namespace WeifenLuo.WinFormsUI.Docking
                 if (handler.Form.ContainsFocus)
                     return;
 
-                if (handler.Form.SelectNextControl(handler.Form.ActiveControl, true, true, true, true))
-                    return;
+                // Blocks window activation after theme switch
+                //if (handler.Form.SelectNextControl(handler.Form.ActiveControl, true, true, true, true))
+                //    return;
 
                 if (Win32Helper.IsRunningOnMono)
                     return;
