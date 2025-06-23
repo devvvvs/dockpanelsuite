@@ -211,8 +211,8 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return;
 
                 // Blocks window activation after theme switch
-                //if (handler.Form.SelectNextControl(handler.Form.ActiveControl, true, true, true, true))
-                //    return;
+                if (!handler.IsFloat && handler.Form.SelectNextControl(handler.Form.ActiveControl, true, true, true, true))
+                    return;
 
                 if (Win32Helper.IsRunningOnMono)
                     return;
