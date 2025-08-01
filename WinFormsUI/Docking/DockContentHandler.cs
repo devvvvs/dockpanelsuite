@@ -755,7 +755,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     }
                 }
 
-                if (Form.ContainsFocus)
+                if (Form.ContainsFocus && Form.ActiveControl != null)
                     return;
 
                 if (Win32Helper.IsRunningOnMono)

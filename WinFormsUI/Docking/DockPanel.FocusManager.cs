@@ -207,7 +207,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     }
                 }
 
-                if (handler.Form.ContainsFocus)
+                if (handler.Form.ContainsFocus && handler.Form.ActiveControl != null)
                     return;
 
                 // Blocks window activation after theme switch
