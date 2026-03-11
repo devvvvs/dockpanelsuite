@@ -266,9 +266,10 @@ namespace WeifenLuo.WinFormsUI.Docking
             {
                 // Close the specified content.
                 IDockContent content = Tabs[index].Content;
+                var wasActiveContent = content == DockPane.ActiveContent;
                 DockPane.CloseContent(content);
                 OnHideTooltip?.Invoke();
-                if (PatchController.EnableSelectClosestOnClose == true)
+                if (PatchController.EnableSelectClosestOnClose == true || wasActiveContent)
                     SelectClosestPane(index);
 
                 return true;
